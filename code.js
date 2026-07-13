@@ -41,10 +41,12 @@ async function recordSvgFailure(svgMarkup, reason) {
 function clearSvgNodeStrokes(node) {
   if (!node) return;
   try {
-    if (node.strokes !== undefined) node.strokes = [];
-  } catch (e) {}
-  try {
-    if (node.strokeWeight !== undefined) node.strokeWeight = 0;
+    const fills = node.fills;
+    const hasVisibleFill = Array.isArray(fills) && fills.some(f => f.visible !== false && f.type !== 'IMAGE');
+    if (hasVisibleFill) {
+      if (node.strokes !== undefined) node.strokes = [];
+      if (node.strokeWeight !== undefined) node.strokeWeight = 0;
+    }
   } catch (e) {}
   if (node.children && node.children.length > 0) {
     for (const child of node.children) {
@@ -412,8 +414,13 @@ async function deserializeNode(data, parent = null) {
     } else if (data.type === 'VECTOR' || data.type === 'BOOLEAN_OPERATION' || data.type === 'ELLIPSE' || data.type === 'POLYGON' || data.type === 'STAR' || data.type === 'RECTANGLE') {
       if (data.svgMarkup) {
         try {
-          const importedNode = figma.createNodeFromSvg(data.svgMarkup);
+          let importedNode = figma.createNodeFromSvg(data.svgMarkup);
           const vectorLikeTypes = ['VECTOR','RECTANGLE','ELLIPSE','POLYGON','STAR','BOOLEAN_OPERATION'];
+          if (importedNode && importedNode.children && importedNode.children.length === 1 && vectorLikeTypes.includes(importedNode.children[0].type) && data.type !== 'GROUP') {
+            if (importedNode.type === 'GROUP' || importedNode.type === 'FRAME' || importedNode.type === 'SECTION' || importedNode.type === 'COMPONENT') {
+              importedNode = importedNode.children[0];
+            }
+          }
           const shapeMatchesType = importedNode && (
             importedNode.type === data.type ||
             (data.type === 'VECTOR' && vectorLikeTypes.includes(importedNode.type)) ||
@@ -917,30 +924,81 @@ async function driveFindIndexFile(folderId) {
   return (json.files && json.files[0]) ? json.files[0].id : null;
 }
 
-async function driveLoadIndex() {
-  if (!driveConfig.folderId) throw new Error('Drive not configured');
-  try {
-    const idxId = await driveFindIndexFile(driveConfig.folderId);
-    if (!idxId) {
-      driveConfig.indexFileId = null;
-      return { folders: [] };
-    }
-    driveConfig.indexFileId = idxId;
-    const text = await driveDownloadFileText(idxId);
-    return JSON.parse(text || '{"folders":[] }');
-  } catch (err) {
-    throw err;
+async function driveFindBackupIndexFile(folderId) {
+  const q = `name = 'assets-diary-index-backup.json' and '${folderId}' in parents and trashed = false`;
+  const url = 'https://www.googleapis.com/drive/v3/files?q=' + encodeURIComponent(q) + '&fields=files(id,name)&pageSize=1';
+  const res = await driveFetch(url, { method: 'GET' });
+  if (!res.ok) {
+    const body = await res.text();
+    throw new Error('Drive list failed: ' + res.status + ' ' + body);
   }
+  const json = await res.json();
+  return (json.files && json.files[0]) ? json.files[0].id : null;
 }
 
-async function driveSaveIndex() {
+async function driveLoadIndex() {
   if (!driveConfig.folderId) throw new Error('Drive not configured');
-  const data = JSON.stringify({ folders: footerFolders });
+
+  // Try loading the main index file first.
+  try {
+    const idxId = await driveFindIndexFile(driveConfig.folderId);
+    if (idxId) {
+      driveConfig.indexFileId = idxId;
+      const text = await driveDownloadFileText(idxId);
+      return JSON.parse(text || '{"folders":[] }');
+    }
+  } catch (err) {
+    // If the primary index is corrupted or missing, we'll attempt recovery from backup.
+  }
+
+  // Fallback: load from backup index file.
+  try {
+    const backupId = await driveFindBackupIndexFile(driveConfig.folderId);
+    if (backupId) {
+      const backupText = await driveDownloadFileText(backupId);
+      const backupData = JSON.parse(backupText || '{"folders":[] }');
+      // Restore the primary index file if it is missing.
+      await driveSaveIndex(backupData);
+      return backupData;
+    }
+  } catch (err) {
+    // Ignore backup load failures and continue with empty default.
+  }
+
+  driveConfig.indexFileId = null;
+  return { folders: [] };
+}
+
+async function driveSaveIndex(overrideData) {
+  if (!driveConfig.folderId) throw new Error('Drive not configured');
+  const indexData = overrideData || { folders: footerFolders };
+  const data = JSON.stringify(indexData);
   const bytes = stringToUint8Array(data);
+
   if (driveConfig.indexFileId) {
-    const payload = buildMultipartBody('assets-diary-index.json', 'application/json; charset=UTF-8', bytes);
-    const res = await driveFetch('https://www.googleapis.com/upload/drive/v3/files/' + encodeURIComponent(driveConfig.indexFileId) + '?uploadType=multipart', {
-      method: 'PATCH',
+    try {
+      const payload = buildMultipartBody('assets-diary-index.json', 'application/json; charset=UTF-8', bytes);
+      const res = await driveFetch('https://www.googleapis.com/upload/drive/v3/files/' + encodeURIComponent(driveConfig.indexFileId) + '?uploadType=multipart', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'multipart/related; boundary=' + payload.boundary
+        },
+        body: payload.body
+      });
+      if (!res.ok) {
+        const body = await res.text();
+        throw new Error('Drive index update failed: ' + res.status + ' ' + body);
+      }
+    } catch (err) {
+      // If the primary index file is gone or broken, clear the ID and recreate it.
+      driveConfig.indexFileId = null;
+    }
+  }
+
+  if (!driveConfig.indexFileId) {
+    const payload = buildMultipartBody('assets-diary-index.json', 'application/json; charset=UTF-8', bytes, driveConfig.folderId);
+    const res = await driveFetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart', {
+      method: 'POST',
       headers: {
         'Content-Type': 'multipart/related; boundary=' + payload.boundary
       },
@@ -948,24 +1006,41 @@ async function driveSaveIndex() {
     });
     if (!res.ok) {
       const body = await res.text();
-      throw new Error('Drive index update failed: ' + res.status + ' ' + body);
+      throw new Error('Drive index create failed: ' + res.status + ' ' + body);
     }
-    return;
+    const json = await res.json();
+    driveConfig.indexFileId = json.id;
   }
-  const payload = buildMultipartBody('assets-diary-index.json', 'application/json; charset=UTF-8', bytes, driveConfig.folderId);
-  const res = await driveFetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'multipart/related; boundary=' + payload.boundary
-    },
-    body: payload.body
-  });
-  if (!res.ok) {
-    const body = await res.text();
-    throw new Error('Drive index create failed: ' + res.status + ' ' + body);
+
+  // Always save a backup copy for recovery if the main index gets lost.
+  try {
+    const backupBytes = stringToUint8Array(data);
+    const backupId = await driveFindBackupIndexFile(driveConfig.folderId);
+    const payload = buildMultipartBody('assets-diary-index-backup.json', 'application/json; charset=UTF-8', backupBytes, driveConfig.folderId);
+    if (backupId) {
+      const res = await driveFetch('https://www.googleapis.com/upload/drive/v3/files/' + encodeURIComponent(backupId) + '?uploadType=multipart', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'multipart/related; boundary=' + payload.boundary },
+        body: payload.body
+      });
+      if (!res.ok) {
+        const body = await res.text();
+        throw new Error('Drive backup index update failed: ' + res.status + ' ' + body);
+      }
+    } else {
+      const res = await driveFetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart', {
+        method: 'POST',
+        headers: { 'Content-Type': 'multipart/related; boundary=' + payload.boundary },
+        body: payload.body
+      });
+      if (!res.ok) {
+        const body = await res.text();
+        throw new Error('Drive backup index create failed: ' + res.status + ' ' + body);
+      }
+    }
+  } catch (e) {
+    // Don't block the main save if backup fails.
   }
-  const json = await res.json();
-  driveConfig.indexFileId = json.id;
 }
 
 async function saveSelectedFrameAsStyle(folderId) {
