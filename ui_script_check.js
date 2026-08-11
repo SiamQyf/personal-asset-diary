@@ -464,18 +464,37 @@ function connectDrive() {
   const refreshToken = document.getElementById('refreshToken').value.trim();
   const clientId = document.getElementById('clientId').value.trim();
   const clientSecret = document.getElementById('clientSecret').value.trim();
+
+  if (refreshToken || clientId || clientSecret) {
+    document.getElementById('saveDriveSettings').checked = true;
+    document.getElementById('saveRefreshToken').checked = true;
+    document.getElementById('saveClientId').checked = true;
+    document.getElementById('saveClientSecret').checked = true;
+  }
+  if (token) {
+    document.getElementById('saveToken').checked = true;
+  }
+
   const remember = document.getElementById('saveDriveSettings').checked;
   const rememberToken = document.getElementById('saveToken').checked;
   const rememberRefreshToken = document.getElementById('saveRefreshToken').checked;
   const rememberClientId = document.getElementById('saveClientId').checked;
   const rememberClientSecret = document.getElementById('saveClientSecret').checked;
   const status = document.getElementById('driveStatus');
+
   if (!folderId || (!token && !refreshToken)) {
-    status.textContent = 'Provide a live access token or refresh credentials';
+    status.textContent = 'Provide Google OAuth Refresh credentials (recommended) or an Access Token';
     status.className = 'status err';
     return;
   }
-  status.textContent = 'Checking...';
+
+  if (refreshToken && (!clientId || !clientSecret)) {
+    status.textContent = 'To use Refresh Token, please also enter Client ID and Client Secret';
+    status.className = 'status err';
+    return;
+  }
+
+  status.textContent = 'Verifying & connecting to Cloud Storage…';
   status.className = 'status';
   parent.postMessage({ pluginMessage: { type: 'connect-drive', driveFolderId: folderId, driveToken: token, refreshToken, clientId, clientSecret, rememberDriveSettings: remember, rememberToken, rememberRefreshToken, rememberClientId, rememberClientSecret } }, '*');
 }

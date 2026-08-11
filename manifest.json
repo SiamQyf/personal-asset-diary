@@ -1,9 +1,17 @@
 {
-  "name": "Siiam's Diary Generator",
-  "id": "Siiam-diary-gen-v3",
+  "name": "Asset's Diary",
+  "id": "1668769370621473943",
   "api": "1.0.0",
   "main": "code.js",
   "ui": "ui.html",
   "editorType": ["figma"],
-  "documentAccess": "dynamic-page"
+  "documentAccess": "dynamic-page",
+  "networkAccess": {
+    "allowedDomains": [
+      "https://api.gumroad.com",
+      "https://www.googleapis.com",
+      "https://oauth2.googleapis.com",
+      "https://accounts.google.com"
+    ]
+  }
 }
