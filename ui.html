@@ -2,104 +2,85 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --vs-bg: #0f0f17;
-  --vs-header-bg: #07070f;
-  --vs-panel-bg: #17171f;
-  --vs-input-bg: #1c1e27;
-  --vs-fg: #bbccee;
-  --vs-muted: #8a9bd1;
-  --vs-accent: #66eeaa;
-  --vs-purple: #8671f0;
-  --vs-magenta: #a438c5;
-  --vs-green: #659a2c;
-  --vs-border: #29293d;
-  --vs-border-highlight: #424260;
-  --vs-danger: #e04c6f;
-}
-
 *{box-sizing:border-box;margin:0;padding:0;border-radius:5px!important}
-body{font-family:'Fira Code','Fira Code Medium',Consolas,monospace,-apple-system,sans-serif;font-feature-settings:"liga" 1,"calt" 1;letter-spacing:-0.3px;line-height:1.8;background:var(--vs-bg);color:var(--vs-fg);font-size:12px;overflow-x:hidden;padding:0 20px}
-::-webkit-scrollbar{width:6px}
-::-webkit-scrollbar-track{background:var(--vs-bg)}
-::-webkit-scrollbar-thumb{background:var(--vs-border-highlight);border-radius:5px}
+body{font-family:-apple-system,'Inter',sans-serif;background:#F8FAFC;color:#0F172A;font-size:12px;line-height:1.5;overflow-x:hidden;padding:0 20px}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:#F1F5F9}
+::-webkit-scrollbar-thumb{background:#CBD5E1;border-radius:5px}
 
 /* ── Header ── */
-.header{background:var(--vs-header-bg);padding:14px 20px 12px;border-bottom:1px solid var(--vs-border);display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:20;box-shadow:0 2px 10px rgba(0,0,0,0.5);margin:0 -20px}
-.header-badge{width:32px;height:32px;border-radius:5px!important;background:linear-gradient(135deg,var(--vs-accent),var(--vs-purple));display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;box-shadow:0 2px 8px rgba(102,238,170,0.3);color:#0f0f17;font-weight:700}
-.header h1{font-size:13px;font-weight:700;color:var(--vs-accent)}
-.header p{font-size:10px;color:var(--vs-muted)}
-.header-breadcrumb{font-size:10px;color:var(--vs-muted);font-weight:500}
+.header{background:#FFFFFF;padding:14px 20px 12px;border-bottom:1px solid #E2E8F0;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:20;box-shadow:0 1px 3px rgba(0,0,0,0.02);margin:0 -20px}
+.header-badge{width:32px;height:32px;border-radius:5px!important;background:linear-gradient(135deg,#6366F1,#8B5CF6);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;box-shadow:0 2px 6px rgba(99,102,241,0.2)}
+.header h1{font-size:13px;font-weight:700;color:#0F172A}
+.header p{font-size:10px;color:#64748B}
+.header-breadcrumb{font-size:10px;color:#64748B;font-weight:500}
 
 /* ── Content ── */
 .content{padding:14px 0 88px}
 .section{margin-bottom:18px}
-.section-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--vs-accent);margin-bottom:9px}
+.section-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#64748B;margin-bottom:9px}
 
 /* ── Folder/Style Cards ── */
 .cards-grid{display:grid;grid-template-columns:repeat(1,1fr);gap:10px}
-.card{background:var(--vs-panel-bg);border:1px solid var(--vs-border);border-radius:5px!important;padding:12px;cursor:pointer;transition:all .15s ease;position:relative;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,0.4)}
-.card:hover{border-color:var(--vs-accent);background:var(--vs-input-bg);box-shadow:0 4px 14px rgba(102,238,170,0.15)}
-.card.active{border-color:var(--vs-accent);background:var(--vs-panel-bg);box-shadow:0 0 0 2px rgba(102,238,170,0.25)}
+.card{background:#FFFFFF;border:1px solid #E2E8F0;border-radius:5px!important;padding:12px;cursor:pointer;transition:all .15s ease;position:relative;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.03)}
+.card:hover{border-color:#6366F1;background:#FFFFFF;box-shadow:0 4px 12px rgba(99,102,241,0.08), 0 2px 4px rgba(0,0,0,0.02)}
+.card.active{border-color:#4F46E5;background:#F8FAFC;box-shadow:0 0 0 2px rgba(79,70,229,0.15)}
 .card.archived{opacity:0.6;filter:grayscale(20%);border-style:dashed}
 .card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.card-title{font-size:12.5px;font-weight:700;color:var(--vs-fg)!important;flex:1}
-.card-meta{font-size:10px;color:var(--vs-muted);margin-top:2px;font-weight:500}
+.card-title{font-size:12.5px;font-weight:700;color:#000000!important;flex:1}
+.card-meta{font-size:10px;color:#64748B;margin-top:2px;font-weight:500}
 .card-actions{display:flex;gap:4px}
-.card-btn{background:var(--vs-input-bg);border:1px solid var(--vs-border-highlight);border-radius:5px!important;color:var(--vs-fg);font-size:10px;font-weight:600;padding:7px 9px;cursor:pointer;transition:all .12s ease}
-.card-btn:hover{border-color:var(--vs-accent);color:var(--vs-accent);background:var(--vs-panel-bg)}
-.icon-edit-btn{background:transparent;border:none;color:var(--vs-muted);padding:7px 4px;border-radius:5px!important;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:all .15s ease;flex-shrink:0}
-.icon-edit-btn:hover{color:var(--vs-accent);background:rgba(102,238,170,0.1)}
-.btn-back{display:inline-flex;align-items:center;gap:6px;background:var(--vs-input-bg);border:1px solid var(--vs-border-highlight);border-radius:5px!important;color:var(--vs-accent);font-size:11px;font-weight:700;padding:5px 11px;cursor:pointer;transition:all .15s ease;box-shadow:0 1px 4px rgba(0,0,0,0.3)}
+.card-btn{background:#F8FAFC;border:1px solid #CBD5E1;border-radius:5px!important;color:#334155;font-size:10px;font-weight:600;padding:7px 9px;cursor:pointer;transition:all .12s ease}
+.card-btn:hover{border-color:#6366F1;color:#4F46E5;background:#FFFFFF}
+.icon-edit-btn{background:transparent;border:none;color:#64748B;padding:7px 4px;border-radius:5px!important;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:all .15s ease;flex-shrink:0}
+.icon-edit-btn:hover{color:#4F46E5;background:rgba(99,102,241,0.1)}
+.btn-back{display:inline-flex;align-items:center;gap:6px;background:#EEF2FF;border:1px solid #C7D2FE;border-radius:5px!important;color:#4F46E5;font-size:11px;font-weight:700;padding:5px 11px;cursor:pointer;transition:all .15s ease;box-shadow:0 1px 2px rgba(99,102,241,0.06)}
 .btn-back[style*="display: block"]{display:inline-flex!important}
-.btn-back:hover{background:var(--vs-accent);color:#0f0f17;border-color:var(--vs-accent);box-shadow:0 2px 10px rgba(102,238,170,0.3);transform:translateY(-1px)}
+.btn-back:hover{background:#6366F1;color:#FFFFFF;border-color:#6366F1;box-shadow:0 2px 8px rgba(99,102,241,0.25);transform:translateY(-1px)}
 .btn-back:active{transform:translateY(0)}
-.preview-box{border-radius:5px!important;margin-bottom:10px;overflow:hidden;position:relative;aspect-ratio:2/1;height:auto;background:#13131c;border:1px solid var(--vs-border-highlight);cursor:zoom-in}
+.preview-box{border-radius:5px!important;margin-bottom:10px;overflow:hidden;position:relative;aspect-ratio:2/1;height:auto;background:#D5D7DD;border:1px solid #E2E8F0;cursor:zoom-in}
 .preview-box .thumb{width:100%;height:100%;display:block;object-fit:contain;pointer-events:none;background:transparent;transition:transform 0.25s cubic-bezier(0.25,1,0.5,1),transform-origin 0.05s ease-out;transform-origin:center center}
 .preview-box:hover .thumb{transform:scale(2.5)}
 
 /* ── Inputs ── */
 .field{margin-bottom:10px}
-label.field-label{display:block;font-size:10px;font-weight:700;color:var(--vs-muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:.06em}
-input[type="text"], input[type="password"], select{width:100%;background:var(--vs-input-bg);border:1px solid var(--vs-border-highlight);border-radius:5px!important;color:var(--vs-fg);font-family:inherit;font-size:12px;padding:9px 12px;outline:none;transition:all .15s ease;box-shadow:0 1px 3px rgba(0,0,0,0.3)}
-input[type="text"]:focus, input[type="password"]:focus, select:focus{border-color:var(--vs-accent);box-shadow:0 0 0 3px rgba(102,238,170,0.2)}
-input.input-error{border-color:var(--vs-danger);box-shadow:0 0 0 3px rgba(224,76,111,0.2)}
+label.field-label{display:block;font-size:10px;font-weight:700;color:#475569;margin-bottom:5px;text-transform:uppercase;letter-spacing:.06em}
+input[type="text"], input[type="password"], select{width:100%;background:#FFFFFF;border:1px solid #CBD5E1;border-radius:5px!important;color:#0F172A;font-family:inherit;font-size:12px;padding:9px 12px;outline:none;transition:all .15s ease;box-shadow:0 1px 2px rgba(0,0,0,0.02)}
+input[type="text"]:focus, input[type="password"]:focus, select:focus{border-color:#6366F1;box-shadow:0 0 0 3px rgba(99,102,241,0.15)}
+input.input-error{border-color:#EF4444;box-shadow:0 0 0 3px rgba(239,68,68,0.15)}
 
 /* ── Divider ── */
-hr{border:none;border-top:1px solid var(--vs-border);margin:18px 0}
+hr{border:none;border-top:1px solid #E2E8F0;margin:18px 0}
 
 /* ── Buttons ── */
-.btn-primary{background:linear-gradient(135deg,var(--vs-accent),var(--vs-purple));color:#0f0f17;border:none;border-radius:5px!important;font-family:inherit;font-size:12px;font-weight:700;padding:10px 16px;cursor:pointer;transition:all .15s ease;letter-spacing:.01em;box-shadow:0 2px 8px rgba(102,238,170,0.25)}
-.btn-primary:hover{opacity:.93;box-shadow:0 4px 14px rgba(102,238,170,0.4)}
+.btn-primary{background:linear-gradient(135deg,#6366F1,#8B5CF6);color:#FFFFFF;border:none;border-radius:5px!important;font-family:inherit;font-size:12px;font-weight:700;padding:10px 16px;cursor:pointer;transition:all .15s ease;letter-spacing:.01em;box-shadow:0 2px 6px rgba(99,102,241,0.2)}
+.btn-primary:hover{opacity:.93;box-shadow:0 4px 12px rgba(99,102,241,0.3)}
 .btn-primary:active{transform:scale(.98)}
 .btn-primary:disabled{opacity:.5;cursor:not-allowed;box-shadow:none}
-.btn-primary.btn-secondary{background:var(--vs-input-bg);border:1px solid var(--vs-border-highlight);color:var(--vs-fg);box-shadow:0 1px 3px rgba(0,0,0,0.2)}
-.btn-primary.btn-secondary:hover{border-color:var(--vs-accent);color:var(--vs-accent);background:var(--vs-panel-bg)}
+.btn-primary.btn-secondary{background:#FFFFFF;border:1px solid #CBD5E1;color:#334155;box-shadow:0 1px 2px rgba(0,0,0,0.03)}
+.btn-primary.btn-secondary:hover{border-color:#6366F1;color:#4F46E5;background:#F8FAFC}
 
 /* ── Bottom Bar ── */
-.bottom-bar{position:fixed;bottom:0;left:0;right:0;padding:12px 20px 16px;background:linear-gradient(to top,var(--vs-bg) 85%,rgba(15,15,23,0));z-index:30}
+.bottom-bar{position:fixed;bottom:0;left:0;right:0;padding:12px 20px 16px;background:linear-gradient(to top,#F8FAFC 80%,rgba(248,250,252,0));z-index:30}
 .status{text-align:center;font-size:11px;min-height:18px;margin-top:6px;font-weight:600}
-.status.ok{color:var(--vs-accent)}
-.status.err{color:var(--vs-danger)}
+.status.ok{color:#059669}
+.status.err{color:#DC2626}
 
 /* ── Modal ── */
-.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(7,7,15,0.85);backdrop-filter:blur(4px);z-index:100;align-items:center;justify-content:center}
+.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,0.4);backdrop-filter:blur(2px);z-index:100;align-items:center;justify-content:center}
 .modal-overlay.active{display:flex}
-.modal{background:var(--vs-panel-bg);border:1px solid var(--vs-border-highlight);border-radius:5px!important;padding:22px;max-width:400px;width:90%;box-shadow:0 20px 30px rgba(0,0,0,0.6)}
-.modal-title{font-size:14px;font-weight:700;color:var(--vs-fg);margin-bottom:10px}
-.modal-message{font-size:11.5px;color:var(--vs-muted);margin-bottom:16px;line-height:1.8}
+.modal{background:#FFFFFF;border:1px solid #E2E8F0;border-radius:5px!important;padding:22px;max-width:400px;width:90%;box-shadow:0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)}
+.modal-title{font-size:14px;font-weight:700;color:#0F172A;margin-bottom:10px}
+.modal-message{font-size:11.5px;color:#475569;margin-bottom:16px;line-height:1.6}
 .modal-buttons{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
-.modal-btn{border:1px solid var(--vs-border-highlight);border-radius:5px!important;padding:8px 14px;font-size:11px;font-weight:600;cursor:pointer;transition:all .15s ease}
-.modal-btn.cancel{color:var(--vs-muted);background:var(--vs-input-bg)}
-.modal-btn.cancel:hover{border-color:var(--vs-accent);color:var(--vs-accent);background:var(--vs-panel-bg)}
-.modal-btn.danger{color:var(--vs-danger);background:rgba(224,76,111,0.1);border-color:rgba(224,76,111,0.3)}
-.modal-btn.danger:hover{background:rgba(224,76,111,0.2);border-color:var(--vs-danger)}
-.modal-btn.primary{color:#0f0f17;background:var(--vs-accent);border-color:var(--vs-accent);box-shadow:0 2px 6px rgba(102,238,170,0.3);font-weight:700}
-.modal-btn.primary:hover{background:var(--vs-purple);color:#ffffff;border-color:var(--vs-purple)}
+.modal-btn{border:1px solid #CBD5E1;border-radius:5px!important;padding:8px 14px;font-size:11px;font-weight:600;cursor:pointer;transition:all .15s ease}
+.modal-btn.cancel{color:#475569;background:#F8FAFC}
+.modal-btn.cancel:hover{border-color:#6366F1;color:#4F46E5;background:#FFFFFF}
+.modal-btn.danger{color:#DC2626;background:#FEF2F2;border-color:#FCA5A5}
+.modal-btn.danger:hover{background:#FEE2E2;border-color:#EF4444}
+.modal-btn.primary{color:#FFFFFF;background:#6366F1;border-color:#6366F1;box-shadow:0 2px 4px rgba(99,102,241,0.2)}
+.modal-btn.primary:hover{background:#4F46E5}
 .modal-btn:disabled{opacity:0.5!important;cursor:not-allowed!important;pointer-events:none!important}
 
 /* ── Views ── */
@@ -118,22 +99,22 @@ hr{border:none;border-top:1px solid var(--vs-border);margin:18px 0}
 -->
 
 <!-- License Key Validation Screen Overlay -->
-<div id="licenseLockScreen" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--vs-bg);z-index:9999;align-items:center;justify-content:center;padding:24px">
-  <div style="background:var(--vs-panel-bg);border:1px solid var(--vs-border);border-radius:12px!important;padding:28px 24px;width:100%;max-width:360px;text-align:center;box-shadow:0 12px 32px rgba(0,0,0,0.06)">
+<div id="licenseLockScreen" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:#F8FAFC;z-index:9999;align-items:center;justify-content:center;padding:24px">
+  <div style="background:#FFFFFF;border:1px solid #E2E8F0;border-radius:12px!important;padding:28px 24px;width:100%;max-width:360px;text-align:center;box-shadow:0 12px 32px rgba(0,0,0,0.06)">
     <div style="width:48px;height:48px;border-radius:24px!important;background:rgba(99,102,241,0.1);display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 16px;color:#4F46E5">🔑</div>
-    <h2 style="font-size:16px;font-weight:700;color:var(--vs-fg);margin-bottom:8px">Activate Assets Diary</h2>
-    <p style="font-size:11px;color:var(--vs-muted);line-height:1.6;margin-bottom:20px">Please enter your Gumroad license key below to unlock all premium features.</p>
+    <h2 style="font-size:16px;font-weight:700;color:#0F172A;margin-bottom:8px">Activate Assets Diary</h2>
+    <p style="font-size:11px;color:#475569;line-height:1.6;margin-bottom:20px">Please enter your Gumroad license key below to unlock all premium features.</p>
     
     <div style="margin-bottom:16px;text-align:left">
-      <label style="display:block;font-size:9px;font-weight:700;color:var(--vs-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.05em">License Key</label>
-      <input type="text" id="licenseKeyInput" placeholder="XXXXXX-XXXXXX-XXXXXX-XXXXXX" style="width:100%;background:var(--vs-panel-bg);border:1px solid var(--vs-border-highlight);border-radius:6px;color:var(--vs-fg);font-size:12px;padding:10px 12px;outline:none" />
+      <label style="display:block;font-size:9px;font-weight:700;color:#64748B;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.05em">License Key</label>
+      <input type="text" id="licenseKeyInput" placeholder="XXXXXX-XXXXXX-XXXXXX-XXXXXX" style="width:100%;background:#FFFFFF;border:1px solid #CBD5E1;border-radius:6px;color:#0F172A;font-size:12px;padding:10px 12px;outline:none" />
     </div>
     
-    <button onclick="activateLicenseKey()" id="activateBtn" style="width:100%;background:linear-gradient(135deg,var(--vs-accent),var(--vs-purple));color:#0f0f17;color:#fff;border:none;border-radius:6px;font-size:12px;font-weight:700;padding:12px;cursor:pointer;margin-bottom:16px;transition:opacity 0.2s">Activate License</button>
+    <button onclick="activateLicenseKey()" id="activateBtn" style="width:100%;background:linear-gradient(135deg,#6366F1,#8B5CF6);color:#fff;border:none;border-radius:6px;font-size:12px;font-weight:700;padding:12px;cursor:pointer;margin-bottom:16px;transition:opacity 0.2s">Activate License</button>
     
     <div id="licenseStatus" style="font-size:11px;min-height:16px;margin-bottom:16px"></div>
     
-    <div style="font-size:11px;color:var(--vs-muted)">
+    <div style="font-size:11px;color:#64748B">
       Don't have a license? <a href="https://gumroad.com" target="_blank" id="gumroadLink" style="color:#4F46E5;text-decoration:none;font-weight:600">Purchase one on Gumroad</a>
     </div>
   </div>
@@ -141,12 +122,12 @@ hr{border:none;border-top:1px solid var(--vs-border);margin:18px 0}
 
 <!-- Pro Upgrade / Paywall Modal -->
 <div id="proPaywallModal" class="modal-overlay">
-  <div class="modal" style="max-width:380px;padding:20px;text-align:left;border-color:rgba(99,102,241,0.3);background:var(--vs-panel-bg);box-shadow:0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)">
+  <div class="modal" style="max-width:380px;padding:20px;text-align:left;border-color:rgba(99,102,241,0.3);background:#FFFFFF;box-shadow:0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
       <div style="display:flex;align-items:center;gap:8px">
-        <div style="width:34px;height:34px;border-radius:8px!important;background:linear-gradient(135deg,var(--vs-accent),var(--vs-purple));color:#0f0f17;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff;box-shadow:0 4px 10px rgba(99,102,241,0.3)">⚡</div>
+        <div style="width:34px;height:34px;border-radius:8px!important;background:linear-gradient(135deg,#6366F1,#8B5CF6);display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff;box-shadow:0 4px 10px rgba(99,102,241,0.3)">⚡</div>
         <div>
-          <div class="modal-title" style="font-size:15px;font-weight:800;color:var(--vs-fg);margin:0">Assets Diary Pro</div>
+          <div class="modal-title" style="font-size:15px;font-weight:800;color:#0F172A;margin:0">Assets Diary Pro</div>
           <div style="font-size:10px;color:#6366F1;font-weight:700">UNLIMITED ACCESS VIA GUMROAD</div>
         </div>
       </div>
@@ -157,32 +138,32 @@ hr{border:none;border-top:1px solid var(--vs-border);margin:18px 0}
       ⚠️ Free Tier Limit Reached: Upgrade to Pro to unlock unlimited access!
     </div>
 
-    <div style="font-size:11px;font-weight:700;color:var(--vs-fg);margin-bottom:8px">Pro Benefits Included:</div>
+    <div style="font-size:11px;font-weight:700;color:#0F172A;margin-bottom:8px">Pro Benefits Included:</div>
     
     <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">
-      <div style="display:flex;align-items:flex-start;gap:8px;font-size:11px;color:var(--vs-fg)">
+      <div style="display:flex;align-items:flex-start;gap:8px;font-size:11px;color:#334155">
         <span style="color:#059669;font-weight:800">✓</span>
         <div><strong>Unlimited Collections:</strong> Create unlimited collection folders (Free: max 2).</div>
       </div>
-      <div style="display:flex;align-items:flex-start;gap:8px;font-size:11px;color:var(--vs-fg)">
+      <div style="display:flex;align-items:flex-start;gap:8px;font-size:11px;color:#334155">
         <span style="color:#059669;font-weight:800">✓</span>
         <div><strong>Unlimited Saved Frames:</strong> Save unlimited frames & groups (Free: max 5 per folder).</div>
       </div>
-      <div style="display:flex;align-items:flex-start;gap:8px;font-size:11px;color:var(--vs-fg)">
+      <div style="display:flex;align-items:flex-start;gap:8px;font-size:11px;color:#334155">
         <span style="color:#059669;font-weight:800">✓</span>
         <div><strong>Offline JSON Backup & Restore:</strong> Download or restore 100% offline JSON backups.</div>
       </div>
-      <div style="display:flex;align-items:flex-start;gap:8px;font-size:11px;color:var(--vs-fg)">
+      <div style="display:flex;align-items:flex-start;gap:8px;font-size:11px;color:#334155">
         <span style="color:#059669;font-weight:800">✓</span>
         <div><strong>Lifetime Updates & Support:</strong> Instant access to all future plugin updates.</div>
       </div>
     </div>
 
-    <div style="background:var(--vs-bg);border:1px solid var(--vs-border);border-radius:8px!important;padding:12px;margin-bottom:14px">
-      <label style="display:block;font-size:10px;font-weight:700;color:var(--vs-muted);margin-bottom:6px;text-transform:uppercase">Have a License Key?</label>
+    <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px!important;padding:12px;margin-bottom:14px">
+      <label style="display:block;font-size:10px;font-weight:700;color:#475569;margin-bottom:6px;text-transform:uppercase">Have a License Key?</label>
       <div style="display:flex;gap:6px">
-        <input type="text" id="proModalLicenseInput" placeholder="Gumroad License Key..." style="flex:1;background:var(--vs-panel-bg);border:1px solid var(--vs-border-highlight);border-radius:6px!important;color:var(--vs-fg);font-size:11px;padding:8px 10px;outline:none" />
-        <button type="button" onclick="activateProLicenseFromModal()" id="proModalActivateBtn" style="background:linear-gradient(135deg,var(--vs-accent),var(--vs-purple));color:#0f0f17;color:#fff;border:none;border-radius:6px!important;font-size:11px;font-weight:700;padding:8px 12px;cursor:pointer;white-space:nowrap">Activate Pro</button>
+        <input type="text" id="proModalLicenseInput" placeholder="Gumroad License Key..." style="flex:1;background:#FFFFFF;border:1px solid #CBD5E1;border-radius:6px!important;color:#0F172A;font-size:11px;padding:8px 10px;outline:none" />
+        <button type="button" onclick="activateProLicenseFromModal()" id="proModalActivateBtn" style="background:linear-gradient(135deg,#6366F1,#8B5CF6);color:#fff;border:none;border-radius:6px!important;font-size:11px;font-weight:700;padding:8px 12px;cursor:pointer;white-space:nowrap">Activate Pro</button>
       </div>
       <div id="proModalLicenseStatus" style="font-size:10px;margin-top:6px;min-height:14px"></div>
     </div>
@@ -218,15 +199,15 @@ hr{border:none;border-top:1px solid var(--vs-border);margin:18px 0}
 <div id="authView" class="view">
   <div class="content" style="padding-top:28px">
     <div style="text-align:center;margin-bottom:24px">
-      <div style="width:48px;height:48px;border-radius:14px!important;background:linear-gradient(135deg,var(--vs-accent),var(--vs-purple));color:#0f0f17;display:inline-flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:12px;box-shadow:0 4px 12px rgba(99,102,241,0.25)">🔒</div>
-      <h2 style="font-size:16px;font-weight:700;color:var(--vs-fg)">Assets Diary Account</h2>
-      <p style="font-size:11px;color:var(--vs-muted);margin-top:4px">Sign in or create an account to manage private collections.</p>
+      <div style="width:48px;height:48px;border-radius:14px!important;background:linear-gradient(135deg,#6366F1,#8B5CF6);display:inline-flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:12px;box-shadow:0 4px 12px rgba(99,102,241,0.25)">🔒</div>
+      <h2 style="font-size:16px;font-weight:700;color:#0F172A">Assets Diary Account</h2>
+      <p style="font-size:11px;color:#64748B;margin-top:4px">Sign in or create an account to manage private collections.</p>
     </div>
 
     <!-- Auth Tabs -->
-    <div style="display:flex;background:#E2E8F0;padding:3px;border-radius:8px!important;margin-bottom:18px;border:1px solid var(--vs-border-highlight)">
+    <div style="display:flex;background:#E2E8F0;padding:3px;border-radius:8px!important;margin-bottom:18px;border:1px solid #CBD5E1">
       <button id="tabLogin" onclick="switchAuthTab('login')" style="flex:1;padding:8px;border:none;border-radius:6px!important;background:#6366F1;color:#fff;font-weight:700;font-size:11px;cursor:pointer">Sign In</button>
-      <button id="tabSignup" onclick="switchAuthTab('signup')" style="flex:1;padding:8px;border:none;border-radius:6px!important;background:transparent;color:var(--vs-muted);font-weight:700;font-size:11px;cursor:pointer">Create Account</button>
+      <button id="tabSignup" onclick="switchAuthTab('signup')" style="flex:1;padding:8px;border:none;border-radius:6px!important;background:transparent;color:#64748B;font-weight:700;font-size:11px;cursor:pointer">Create Account</button>
     </div>
 
     <!-- Sign In Form Box -->
@@ -238,8 +219,8 @@ hr{border:none;border-top:1px solid var(--vs-border);margin:18px 0}
       <div class="field" style="margin-top:12px">
         <label class="field-label">Password</label>
         <div style="position:relative">
-          <input type="password" id="authPassword" placeholder="••••••••" style="width:100%;background:var(--vs-panel-bg);border:1px solid var(--vs-border-highlight);border-radius:6px;color:var(--vs-fg);font-size:12px;padding:9px 36px 9px 12px;outline:none" onkeydown="if(event.key==='Enter') submitLoginForm()" />
-          <button type="button" onclick="togglePasswordVisibility('authPassword', this)" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--vs-muted);cursor:pointer;font-size:12px;padding:2px">👁️</button>
+          <input type="password" id="authPassword" placeholder="••••••••" style="width:100%;background:#FFFFFF;border:1px solid #CBD5E1;border-radius:6px;color:#0F172A;font-size:12px;padding:9px 36px 9px 12px;outline:none" onkeydown="if(event.key==='Enter') submitLoginForm()" />
+          <button type="button" onclick="togglePasswordVisibility('authPassword', this)" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;color:#64748B;cursor:pointer;font-size:12px;padding:2px">👁️</button>
         </div>
       </div>
       <button id="authLoginBtn" class="btn-primary" style="width:100%;margin-top:16px" onclick="submitLoginForm()">Sign In</button>
@@ -258,15 +239,15 @@ hr{border:none;border-top:1px solid var(--vs-border);margin:18px 0}
       <div class="field" style="margin-top:12px">
         <label class="field-label">Create Password</label>
         <div style="position:relative">
-          <input type="password" id="signupPassword" placeholder="Minimum 6 characters" style="width:100%;background:var(--vs-panel-bg);border:1px solid var(--vs-border-highlight);border-radius:6px;color:var(--vs-fg);font-size:12px;padding:9px 36px 9px 12px;outline:none" onkeydown="if(event.key==='Enter') submitSignupForm()" />
-          <button type="button" onclick="togglePasswordVisibility('signupPassword', this)" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--vs-muted);cursor:pointer;font-size:12px;padding:2px">👁️</button>
+          <input type="password" id="signupPassword" placeholder="Minimum 6 characters" style="width:100%;background:#FFFFFF;border:1px solid #CBD5E1;border-radius:6px;color:#0F172A;font-size:12px;padding:9px 36px 9px 12px;outline:none" onkeydown="if(event.key==='Enter') submitSignupForm()" />
+          <button type="button" onclick="togglePasswordVisibility('signupPassword', this)" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;color:#64748B;cursor:pointer;font-size:12px;padding:2px">👁️</button>
         </div>
       </div>
       <div class="field" style="margin-top:12px">
         <label class="field-label">Confirm Password</label>
         <div style="position:relative">
-          <input type="password" id="signupConfirmPassword" placeholder="Re-enter password" style="width:100%;background:var(--vs-panel-bg);border:1px solid var(--vs-border-highlight);border-radius:6px;color:var(--vs-fg);font-size:12px;padding:9px 36px 9px 12px;outline:none" onkeydown="if(event.key==='Enter') submitSignupForm()" />
-          <button type="button" onclick="togglePasswordVisibility('signupConfirmPassword', this)" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--vs-muted);cursor:pointer;font-size:12px;padding:2px">👁️</button>
+          <input type="password" id="signupConfirmPassword" placeholder="Re-enter password" style="width:100%;background:#FFFFFF;border:1px solid #CBD5E1;border-radius:6px;color:#0F172A;font-size:12px;padding:9px 36px 9px 12px;outline:none" onkeydown="if(event.key==='Enter') submitSignupForm()" />
+          <button type="button" onclick="togglePasswordVisibility('signupConfirmPassword', this)" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;color:#64748B;cursor:pointer;font-size:12px;padding:2px">👁️</button>
         </div>
       </div>
       <button id="authSignupBtn" class="btn-primary" style="width:100%;margin-top:16px;background:linear-gradient(135deg,#8B5CF6,#6366F1)" onclick="submitSignupForm()">Create Account</button>
@@ -287,17 +268,17 @@ hr{border:none;border-top:1px solid var(--vs-border);margin:18px 0}
 
       <!-- Stat Badges -->
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px">
-        <div style="background:var(--vs-panel-bg);border:1px solid var(--vs-border);border-radius:8px!important;padding:10px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.03)">
+        <div style="background:#FFFFFF;border:1px solid #E2E8F0;border-radius:8px!important;padding:10px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.03)">
           <div style="font-size:18px;font-weight:800;color:#4F46E5" id="adminTotalUsers">0</div>
-          <div style="font-size:9px;color:var(--vs-muted);text-transform:uppercase;margin-top:2px;font-weight:700">Users</div>
+          <div style="font-size:9px;color:#64748B;text-transform:uppercase;margin-top:2px;font-weight:700">Users</div>
         </div>
-        <div style="background:var(--vs-panel-bg);border:1px solid var(--vs-border);border-radius:8px!important;padding:10px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.03)">
+        <div style="background:#FFFFFF;border:1px solid #E2E8F0;border-radius:8px!important;padding:10px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.03)">
           <div style="font-size:18px;font-weight:800;color:#7C3AED" id="adminTotalFolders">0</div>
-          <div style="font-size:9px;color:var(--vs-muted);text-transform:uppercase;margin-top:2px;font-weight:700">Collections</div>
+          <div style="font-size:9px;color:#64748B;text-transform:uppercase;margin-top:2px;font-weight:700">Collections</div>
         </div>
-        <div style="background:var(--vs-panel-bg);border:1px solid var(--vs-border);border-radius:8px!important;padding:10px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.03)">
+        <div style="background:#FFFFFF;border:1px solid #E2E8F0;border-radius:8px!important;padding:10px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.03)">
           <div style="font-size:18px;font-weight:800;color:#059669" id="adminTotalStyles">0</div>
-          <div style="font-size:9px;color:var(--vs-muted);text-transform:uppercase;margin-top:2px;font-weight:700">Frames</div>
+          <div style="font-size:9px;color:#64748B;text-transform:uppercase;margin-top:2px;font-weight:700">Frames</div>
         </div>
       </div>
 
@@ -305,19 +286,19 @@ hr{border:none;border-top:1px solid var(--vs-border);margin:18px 0}
       <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px">
         <div class="field" style="margin-bottom:0">
           <label class="field-label">Filter by User</label>
-          <select id="adminUserSelect" style="width:100%;background:var(--vs-panel-bg);border:1px solid var(--vs-border-highlight);border-radius:6px;color:var(--vs-fg);font-size:11px;padding:8px 10px;outline:none" onchange="renderAdminUserCollections()">
+          <select id="adminUserSelect" style="width:100%;background:#FFFFFF;border:1px solid #CBD5E1;border-radius:6px;color:#0F172A;font-size:11px;padding:8px 10px;outline:none" onchange="renderAdminUserCollections()">
             <option value="ALL">All Registered Users</option>
           </select>
         </div>
         <div class="field" style="margin-bottom:0">
           <label class="field-label">Search Users or Collections</label>
-          <input type="text" id="adminSearchInput" placeholder="Type user name, email or collection name..." style="width:100%;background:var(--vs-panel-bg);border:1px solid var(--vs-border-highlight);border-radius:6px;color:var(--vs-fg);font-size:11px;padding:8px 10px;outline:none" oninput="renderAdminUserCollections()" />
+          <input type="text" id="adminSearchInput" placeholder="Type user name, email or collection name..." style="width:100%;background:#FFFFFF;border:1px solid #CBD5E1;border-radius:6px;color:#0F172A;font-size:11px;padding:8px 10px;outline:none" oninput="renderAdminUserCollections()" />
         </div>
       </div>
 
       <!-- Numbered Users & Collections List -->
       <div id="adminFoldersGrid" style="display:flex;flex-direction:column;gap:12px">
-        <div style="font-size:11px;color:var(--vs-muted);padding:14px;text-align:center">Loading user records…</div>
+        <div style="font-size:11px;color:#64748B;padding:14px;text-align:center">Loading user records…</div>
       </div>
     </div>
   </div>
@@ -337,7 +318,7 @@ hr{border:none;border-top:1px solid var(--vs-border);margin:18px 0}
       </div>
       
       <div id="foldersGrid" class="cards-grid">
-        <div id="noFoldersMsg" style="grid-column:1/-1;font-size:11px;color:var(--vs-muted);padding:16px;border:1px dashed var(--vs-border-highlight);border-radius:6px;text-align:center;background:var(--vs-panel-bg)">
+        <div id="noFoldersMsg" style="grid-column:1/-1;font-size:11px;color:#64748B;padding:16px;border:1px dashed #CBD5E1;border-radius:6px;text-align:center;background:#FFFFFF">
           No collections yet. Create one to get started.
         </div>
       </div>
@@ -356,12 +337,12 @@ hr{border:none;border-top:1px solid var(--vs-border);margin:18px 0}
     <hr style="margin:22px 0 18px">
 
     <!-- Data Protection & Offline Backup Section -->
-    <div class="section" style="margin-top:20px;background:var(--vs-panel-bg);border:1px solid var(--vs-border);padding:12px;border-radius:8px!important;box-shadow:0 1px 3px rgba(0,0,0,0.02)">
+    <div class="section" style="margin-top:20px;background:#FFFFFF;border:1px solid #E2E8F0;padding:12px;border-radius:8px!important;box-shadow:0 1px 3px rgba(0,0,0,0.02)">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-        <div style="font-size:10px;font-weight:700;color:var(--vs-fg);text-transform:uppercase;letter-spacing:0.06em">🛡️ Data Protection & Offline Backup</div>
+        <div style="font-size:10px;font-weight:700;color:#0F172A;text-transform:uppercase;letter-spacing:0.06em">🛡️ Data Protection & Offline Backup</div>
         <span id="jsonBackupBadge" style="font-size:9.5px;color:#7C3AED;font-weight:700;background:rgba(124,58,237,0.08);padding:2px 6px;border-radius:4px;border:1px solid rgba(124,58,237,0.2)">🔒 Pro Feature</span>
       </div>
-      <div style="font-size:10px;color:var(--vs-muted);margin-bottom:10px;line-height:1.4">Collections are automatically multi-backed up. Download or restore a hard offline copy anytime:</div>
+      <div style="font-size:10px;color:#64748B;margin-bottom:10px;line-height:1.4">Collections are automatically multi-backed up. Download or restore a hard offline copy anytime:</div>
       <div style="display:flex;gap:8px">
         <button class="card-btn" onclick="exportBackupJSON()" style="flex:1;color:#4F46E5;border-color:rgba(79,70,229,0.3);background:rgba(79,70,229,0.04);font-weight:700">📥 Export Backup (.json)</button>
         <button class="card-btn" onclick="triggerImportBackup()" style="flex:1;color:#059669;border-color:rgba(5,150,105,0.3);background:rgba(5,150,105,0.04);font-weight:700">📤 Import Backup (.json)</button>
@@ -376,13 +357,13 @@ hr{border:none;border-top:1px solid var(--vs-border);margin:18px 0}
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
         <div>
           <div class="section-title" style="color:#DC2626;margin-bottom:2px">🗑️ Deleted Backup</div>
-          <div style="font-size:10px;color:var(--vs-muted)">Deleted collections, frames & groups can be restored anytime.</div>
+          <div style="font-size:10px;color:#64748B">Deleted collections, frames & groups can be restored anytime.</div>
         </div>
         <button class="card-btn empty-trash-btn" onclick="emptyTrashCan()" id="emptyTrashBtn" style="font-size:10px;padding:4px 9px;color:#DC2626;border-color:rgba(220,38,38,0.3);background:rgba(239,68,68,0.06);display:none">Empty Trash</button>
       </div>
 
       <div id="trashGrid" class="cards-grid trash-grid">
-        <div id="noTrashMsg" class="no-trash-msg" style="grid-column:1/-1;font-size:11px;color:var(--vs-muted);padding:16px;border:1px dashed var(--vs-border-highlight);border-radius:5px;text-align:center;background:var(--vs-panel-bg)">
+        <div id="noTrashMsg" class="no-trash-msg" style="grid-column:1/-1;font-size:11px;color:#64748B;padding:16px;border:1px dashed #CBD5E1;border-radius:5px;text-align:center;background:#FFFFFF">
           Trashcan is empty. Deleted items will appear here.
         </div>
       </div>
@@ -408,24 +389,24 @@ hr{border:none;border-top:1px solid var(--vs-border);margin:18px 0}
 <div id="folderDetailView" class="view">
   <div class="content">
     <!-- Action Card for Saving Canvas Selection to Folder -->
-    <div id="selectedFrameCard" style="padding:14px;border:1px solid var(--vs-purple);border-radius:10px!important;background:linear-gradient(135deg,#17171f 0%,#1c1e27 100%);margin-bottom:16px;margin-top:10px;box-shadow:0 4px 12px rgba(99,102,241,0.08)">
+    <div id="selectedFrameCard" style="padding:14px;border:1px solid #C7D2FE;border-radius:10px!important;background:linear-gradient(135deg,#EEF2FF 0%,#F5F3FF 100%);margin-bottom:16px;margin-top:10px;box-shadow:0 4px 12px rgba(99,102,241,0.08)">
       <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap">
         <div style="flex:1;min-width:150px">
           <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
-            <span id="selectedFrameBadge" style="font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px!important;background:var(--vs-accent);color:#0f0f17;text-transform:uppercase">ELEMENT SELECTION</span>
+            <span id="selectedFrameBadge" style="font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px!important;background:#4F46E5;color:#FFF;text-transform:uppercase">ELEMENT SELECTION</span>
           </div>
-          <div style="font-size:13px;font-weight:700;color:var(--vs-fg)" id="selectedFrameName">Save Canvas Frame</div>
-          <div style="font-size:11px;color:var(--vs-muted);margin-top:2px" id="selectedFrameSize">Select any frame or layer on your Figma canvas, then save it here.</div>
+          <div style="font-size:13px;font-weight:700;color:#1E1B4B" id="selectedFrameName">Save Canvas Frame</div>
+          <div style="font-size:11px;color:#4338CA;margin-top:2px" id="selectedFrameSize">Select any frame or layer on your Figma canvas, then save it here.</div>
           <div id="selectedFramesList" style="margin-top:8px;display:none">
-            <div style="font-size:10px;color:var(--vs-muted);margin-bottom:6px;font-weight:600">Selected canvas elements:</div>
-            <div id="frameListItems" style="font-size:10px;color:var(--vs-fg);max-height:100px;overflow-y:auto"></div>
+            <div style="font-size:10px;color:#475569;margin-bottom:6px;font-weight:600">Selected canvas elements:</div>
+            <div id="frameListItems" style="font-size:10px;color:#334155;max-height:100px;overflow-y:auto"></div>
           </div>
         </div>
         <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end">
-          <button class="btn-primary" id="addSelectedBtn" style="width:auto;padding:8px 16px;font-size:11px;background:linear-gradient(135deg,var(--vs-accent),var(--vs-purple));color:#0f0f17;display:flex;align-items:center;gap:4px">
+          <button class="btn-primary" id="addSelectedBtn" style="width:auto;padding:8px 16px;font-size:11px;background:linear-gradient(135deg,#6366F1,#8B5CF6);display:flex;align-items:center;gap:4px">
             Save Frame
           </button>
-          <button class="btn-primary" id="addSelectedMultiBtn" style="width:auto;padding:8px 16px;font-size:11px;background:linear-gradient(135deg,var(--vs-accent),var(--vs-purple));color:#0f0f17;display:none;align-items:center;gap:4px">
+          <button class="btn-primary" id="addSelectedMultiBtn" style="width:auto;padding:8px 16px;font-size:11px;background:linear-gradient(135deg,#6366F1,#8B5CF6);display:none;align-items:center;gap:4px">
             Save Selected Frames
           </button>
         </div>
@@ -437,7 +418,7 @@ hr{border:none;border-top:1px solid var(--vs-border);margin:18px 0}
         <div class="section-title">Saved Collections</div>
       </div>
       <div id="stylesGrid" class="cards-grid">
-        <div id="noStylesMsg" style="grid-column:1/-1;font-size:11px;color:var(--vs-muted);padding:16px;border:1px dashed var(--vs-border-highlight);border-radius:6px;text-align:center;background:var(--vs-panel-bg)">
+        <div id="noStylesMsg" style="grid-column:1/-1;font-size:11px;color:#64748B;padding:16px;border:1px dashed #CBD5E1;border-radius:6px;text-align:center;background:#FFFFFF">
           No frames in this collection yet.
         </div>
       </div>
@@ -448,13 +429,13 @@ hr{border:none;border-top:1px solid var(--vs-border);margin:18px 0}
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
         <div>
           <div class="section-title" style="color:#DC2626;margin-bottom:2px">🗑️ Deleted Backup (Trashcan)</div>
-          <div style="font-size:10px;color:var(--vs-muted)">Deleted collections, frames & groups can be restored anytime.</div>
+          <div style="font-size:10px;color:#64748B">Deleted collections, frames & groups can be restored anytime.</div>
         </div>
         <button class="card-btn empty-trash-btn" onclick="emptyTrashCan()" style="font-size:10px;padding:4px 9px;color:#DC2626;border-color:rgba(220,38,38,0.3);background:rgba(239,68,68,0.06);display:none">Empty Trash</button>
       </div>
 
       <div class="cards-grid trash-grid">
-        <div class="no-trash-msg" style="grid-column:1/-1;font-size:11px;color:var(--vs-muted);padding:16px;border:1px dashed var(--vs-border-highlight);border-radius:5px;text-align:center;background:var(--vs-panel-bg)">
+        <div class="no-trash-msg" style="grid-column:1/-1;font-size:11px;color:#64748B;padding:16px;border:1px dashed #CBD5E1;border-radius:5px;text-align:center;background:#FFFFFF">
           Trashcan is empty. Deleted items will appear here.
         </div>
       </div>
@@ -489,14 +470,14 @@ hr{border:none;border-top:1px solid var(--vs-border);margin:18px 0}
   <div class="modal" style="text-align:center;max-width:340px;border-color:rgba(239,68,68,0.3)">
     <div style="font-size:36px;margin-bottom:6px">⚠️</div>
     <div class="modal-title" id="countdownTitle" style="color:#DC2626">Confirm Deletion</div>
-    <div class="modal-message" id="countdownMessage" style="font-size:12px;color:var(--vs-fg);margin-bottom:8px">
+    <div class="modal-message" id="countdownMessage" style="font-size:12px;color:#334155;margin-bottom:8px">
       Delete <strong id="countdownFolderCount" style="color:#DC2626">0</strong> selected collection(s)?
     </div>
     <div style="font-size:11.5px;color:#059669;margin:12px 0;background:rgba(16,185,129,0.08);padding:8px 10px;border-radius:6px;border:1px solid rgba(16,185,129,0.2)" id="countdownTimerBox">
       Items will be moved to Deleted Backup and can be restored anytime.
     </div>
     <div class="modal-buttons" style="display:flex;gap:8px;margin-top:14px">
-      <button class="modal-btn cancel" onclick="cancelBulkDeleteCountdown()" style="flex:1;padding:9px;font-size:12px;font-weight:700;background:#F1F5F9;color:var(--vs-fg)">Cancel</button>
+      <button class="modal-btn cancel" onclick="cancelBulkDeleteCountdown()" style="flex:1;padding:9px;font-size:12px;font-weight:700;background:#F1F5F9;color:#334155">Cancel</button>
       <button class="modal-btn primary" id="confirmDeleteBtn" onclick="executeBulkDeleteNow()" style="flex:1;padding:9px;font-size:12px;font-weight:700;background:linear-gradient(135deg, #EF4444, #DC2626);border-color:#EF4444;color:#fff;cursor:pointer">🗑️ Delete Now</button>
     </div>
   </div>
@@ -733,13 +714,13 @@ function renderAdminUserCollections() {
   }
 
   if (!matchingUsers.length) {
-    grid.innerHTML = `<div style="font-size:11px;color:var(--vs-muted);padding:20px;text-align:center;background:var(--vs-panel-bg);border:1px dashed var(--vs-border-highlight);border-radius:6px">No users or collections match your filter criteria.</div>`;
+    grid.innerHTML = `<div style="font-size:11px;color:#64748B;padding:20px;text-align:center;background:#FFFFFF;border:1px dashed #CBD5E1;border-radius:6px">No users or collections match your filter criteria.</div>`;
     return;
   }
 
   matchingUsers.forEach((uData, index) => {
     const userBlock = document.createElement('div');
-    userBlock.style.background = '#17171f'; userBlock.style.border = '1px solid #29293d';
+    userBlock.style.background = '#FFFFFF';
     userBlock.style.border = '1px solid #E2E8F0';
     userBlock.style.borderRadius = '8px';
     userBlock.style.padding = '12px';
@@ -763,10 +744,10 @@ function renderAdminUserCollections() {
             ${index + 1}
           </div>
           <div style="min-width:0">
-            <div style="font-size:12px;font-weight:700;color:var(--vs-fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">
+            <div style="font-size:12px;font-weight:700;color:#0F172A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">
               ${index + 1}. ${displayName}
             </div>
-            <div style="font-size:10px;color:var(--vs-muted);margin-top:2px">
+            <div style="font-size:10px;color:#64748B;margin-top:2px">
               ${uData.foldersCount} collection folder${uData.foldersCount !== 1 ? 's' : ''} • ${uData.stylesCount} total frame${uData.stylesCount !== 1 ? 's' : ''}
             </div>
           </div>
@@ -786,10 +767,10 @@ function renderAdminUserCollections() {
     if (!uData.folders || !uData.folders.length) {
       const emptyMsg = document.createElement('div');
       emptyMsg.style.fontSize = '10px';
-      emptyMsg.style.color = '#8a9bd1';
+      emptyMsg.style.color = '#64748B';
       emptyMsg.style.padding = '8px 10px';
-      emptyMsg.style.background = '#1c1e27';
-      emptyMsg.style.border = '1px dashed #424260';
+      emptyMsg.style.background = '#F8FAFC';
+      emptyMsg.style.border = '1px dashed #CBD5E1';
       emptyMsg.style.borderRadius = '6px';
       emptyMsg.innerHTML = '📁 No collection folders created by this user yet.';
       collectionsContainer.appendChild(emptyMsg);
@@ -802,8 +783,8 @@ function renderAdminUserCollections() {
       uData.folders.forEach(folder => {
         const card = document.createElement('div');
         card.className = 'card';
-        card.style.background = '#1c1e27';
-        card.style.border = '1px solid #29293d';
+        card.style.background = '#F8FAFC';
+        card.style.border = '1px solid #E2E8F0';
         card.style.borderRadius = '6px';
         card.style.padding = '10px 12px';
         card.style.cursor = 'pointer';
@@ -811,12 +792,12 @@ function renderAdminUserCollections() {
         const count = folder.styles ? folder.styles.length : 0;
         card.innerHTML = `
           <div class="card-header" style="margin-bottom:4px">
-            <div class="card-title" style="font-size:12px;font-weight:600;color:var(--vs-fg);display:flex;align-items:center;gap:6px">
+            <div class="card-title" style="font-size:12px;font-weight:600;color:#0F172A;display:flex;align-items:center;gap:6px">
               <span>📁</span> ${escapeHtml(folder.name)}
             </div>
             <button class="card-btn" style="font-size:9px;padding:3px 8px;background:rgba(99,102,241,0.08);color:#4F46E5;border-color:rgba(99,102,241,0.25)">View Frames →</button>
           </div>
-          <div class="card-meta" style="font-size:10px;color:var(--vs-muted);margin-left:22px">${count} frame${count !== 1 ? 's' : ''} inside this collection</div>
+          <div class="card-meta" style="font-size:10px;color:#64748B;margin-left:22px">${count} frame${count !== 1 ? 's' : ''} inside this collection</div>
         `;
         card.onclick = () => showFolderDetail(folder.folderId);
         cardsGrid.appendChild(card);
@@ -882,7 +863,7 @@ function renderTrashItems(items) {
       card.className = 'card';
       card.setAttribute('data-trash-id', item.trashId);
       card.style.borderColor = 'rgba(239,68,68,0.25)';
-      card.style.background = '#17171f';
+      card.style.background = '#FFFFFF';
       card.style.boxShadow = '0 1px 3px rgba(0,0,0,0.03)';
 
       const isFolder = item.itemType === 'folder';
@@ -907,8 +888,8 @@ function renderTrashItems(items) {
       card.innerHTML = `
         <div class="card-header" style="margin-bottom:0">
           <div style="flex:1;min-width:0;padding-right:8px">
-            <div class="card-title" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--vs-fg)!important;font-size:12.5px">${escapeHtml(title)}</div>
-            <div style="font-size:9.5px;color:var(--vs-muted);margin-top:3px;font-weight:600;display:flex;align-items:center;gap:6px">
+            <div class="card-title" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#000000!important;font-size:12.5px">${escapeHtml(title)}</div>
+            <div style="font-size:9.5px;color:#64748B;margin-top:3px;font-weight:600;display:flex;align-items:center;gap:6px">
               <span style="background:rgba(239,68,68,0.08);color:#DC2626;border:1px solid rgba(239,68,68,0.2);padding:1px 5px;border-radius:4px">${badgeText}</span>
               ${dateStr ? '<span>• ' + dateStr + '</span>' : ''}
             </div>
@@ -1263,7 +1244,7 @@ function updateStylesList() {
       </div>
       <div style="display:flex;justify-content:space-between;align-items:center;gap:6px;margin-bottom:2px">
         <div style="display:flex;align-items:center;gap:4px;flex:1;min-width:0">
-          <div style="font-size:12px;font-weight:700;color:var(--vs-fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${escapeHtml(styleTitle)}">${escapeHtml(styleTitle)}</div>
+          <div style="font-size:12px;font-weight:700;color:#000000;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${escapeHtml(styleTitle)}">${escapeHtml(styleTitle)}</div>
           <button type="button" class="icon-edit-btn" title="Rename frame" onclick="event.stopPropagation(); showRenameStyleModal('${currentFolderId}', '${style.styleId}')">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
           </button>
@@ -1271,7 +1252,7 @@ function updateStylesList() {
         <button type="button" class="card-btn" onclick="event.stopPropagation(); showDeleteStyleModal('${style.styleId}')">Delete</button>
       </div>
       <div style="font-size:10px;font-weight:600;color:#4F46E5;margin-bottom:6px">${(style.width && style.height) ? `${Math.round(style.width)} × ${Math.round(style.height)} px` : ''}</div>
-      <div style="font-size:10px;color:var(--vs-muted)">Saved ${style.createdAt ? new Date(style.createdAt).toLocaleDateString() : ''}</div>
+      <div style="font-size:10px;color:#64748B">Saved ${style.createdAt ? new Date(style.createdAt).toLocaleDateString() : ''}</div>
     `;
     
     card.classList.toggle('active', selectedStyleIds.includes(style.styleId));
